@@ -1,0 +1,10 @@
+out.host=127.0.0.1
+out.port=9002
+
+mq.sessionCacheSize=20
+mq.username=moni
+mq.password=moni
+mq.brokerURL=tcp://127.0.0.1:61616
+
+mq.fromDeviceQueuename=avl03_fromdevice1
+mq.toDeviceQueuename=avl03_todevice
