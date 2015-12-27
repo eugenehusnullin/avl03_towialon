@@ -16,8 +16,8 @@
 		<property name="port" value="${out.port}"></property>
 	</bean>
 
-	<util:properties id="mainSettings" location="WEB-INF\settings\settings"></util:properties>
-	<context:property-placeholder location="WEB-INF\settings\settings" />
+	<util:properties id="mainSettings" location="WEB-INF\settings"></util:properties>
+	<context:property-placeholder location="WEB-INF\settings" />
 	<context:annotation-config />
 
 	<bean id="cachedConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory" destroy-method="resetConnection">

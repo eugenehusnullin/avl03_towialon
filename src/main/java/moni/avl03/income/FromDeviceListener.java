@@ -26,6 +26,8 @@ import moni.avl03.state.NotConnectedException;
 
 public class FromDeviceListener implements MessageListener {
 	private static final Logger logger = LoggerFactory.getLogger(FromDeviceListener.class);
+	private static final Logger packetsLogger = LoggerFactory.getLogger("packets");
+	private static final Logger responsesLogger = LoggerFactory.getLogger("responses");
 	private ChannelKeeper channelKeeper;
 	private JmsManager jmsManager;
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss z").create();
@@ -84,6 +86,7 @@ public class FromDeviceListener implements MessageListener {
 	private void infoMessage(String str) {
 		InfoMessage mes = gson.fromJson(str, InfoMessage.class);
 		String encoded = avl03Encoder.encode(mes);
+		packetsLogger.info(encoded);
 		logger.debug(encoded);
 
 		send(mes.getDeviceId(), encoded);
@@ -100,6 +103,7 @@ public class FromDeviceListener implements MessageListener {
 
 	private void responseMessage(String str) {
 		ResponseMessage mes = gson.fromJson(str, ResponseMessage.class);
+		responsesLogger.info(mes.getDeviceId().toString() + " - " + mes.getResponse());
 		send(mes.getDeviceId(), mes.getResponse());
 	}
 

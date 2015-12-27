@@ -4,7 +4,7 @@ sourceCompatibility = 1.8
 version = '0.0.1'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'avl03_sender',
+        attributes 'Implementation-Title': 'avl03_towialon',
                    'Implementation-Version': version
     }
 }

@@ -1,12 +1,14 @@
 package moni.avl03.encode;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Formatter;
 import java.util.Locale;
 
 import moni.avl03.domain.InfoMessage;
 
 public class Avl03Encoder {
+	private Charset asciiCharset = Charset.forName("ASCII");
+
 	// src:
 	// $$B2359772031093009|AA$GPRMC,210006.000,A,5542.2011,N,03741.1583,E,0.00,,111215,,,A*78|01.7|01.0|01.3|000000000000|20151211210006|14291311|00000000|1E5177FE|0000|0.0000|0375|5920
 	// dst:
@@ -45,20 +47,15 @@ public class Avl03Encoder {
 		sb.append("|||");
 		sb.insert(2, String.format("%X", sb.length() + 6));
 
-		long crc = createCheckSum(sb.toString());		
+		long crc = createCheckSum(sb.toString());
 		formatter.format("%04X", crc);
 
 		formatter.close();
 		return sb.toString();
 	}
-	
+
 	private long createCheckSum(String s) {
-		byte[] bytes;
-		try {
-			bytes = s.getBytes("ASCII");
-		} catch (UnsupportedEncodingException e) {
-			return 0;
-		}
+		byte[] bytes = s.getBytes(asciiCharset);
 
 		CRC16 crc16 = new CRC16();
 		crc16.update(bytes);
@@ -105,12 +102,7 @@ public class Avl03Encoder {
 	}
 
 	public int createNmeaChecksum(String s) {
-		byte[] bytes;
-		try {
-			bytes = s.getBytes("ASCII");
-		} catch (UnsupportedEncodingException e) {
-			return 0;
-		}
+		byte[] bytes = s.getBytes(asciiCharset);
 
 		int crc = 0x0;
 		for (byte t : bytes) {

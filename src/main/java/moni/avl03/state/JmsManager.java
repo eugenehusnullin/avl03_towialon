@@ -33,7 +33,7 @@ public class JmsManager {
 			if (!stoped) {
 				stoped = true;
 				jmsContainer.stop();
-				logger.info("infoJmsContainer stoped.");
+				logger.info("jms stoped.");
 
 				startScheduledConnectCheck();
 			} else {
@@ -47,9 +47,9 @@ public class JmsManager {
 			if (stoped) {
 				stoped = false;
 				jmsContainer.start();
-				logger.info("infoJmsContainer started.");
+				logger.info("jms started.");
 			} else {
-				logger.error("try start jms, but it started.");
+				logger.warn("try start jms, but it started.");
 			}
 		}
 	}
@@ -68,11 +68,11 @@ public class JmsManager {
 		}
 
 		if (canConnect) {
-			startJms();
 			logger.info("can connect to wialon. stop check connection and start jms.");
+			startJms();
 		} else {
-			startScheduledConnectCheck();
 			logger.warn("cannot connect to wialon. next check throw little interval.");
+			startScheduledConnectCheck();
 		}
 	}
 }

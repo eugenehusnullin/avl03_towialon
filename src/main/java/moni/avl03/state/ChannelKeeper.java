@@ -1,5 +1,6 @@
 package moni.avl03.state;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class ChannelKeeper {
 
 	private Map<Long, Channel> channelMap = new HashMap<Long, Channel>();
 	public final static AttributeKey<Long> AK_ID = AttributeKey.valueOf("id");
+	public final static AttributeKey<Long> AK_LASTWRITE = AttributeKey.valueOf("last_wr");
 
 	public void setHost(String host) {
 		this.host = host;
@@ -70,6 +72,7 @@ public class ChannelKeeper {
 		}
 
 		channelMap.clear();
+		logger.info("Channels stoped.");
 	}
 
 	private Channel connect(Long id) throws InterruptedException, NotConnectedException {
@@ -102,10 +105,18 @@ public class ChannelKeeper {
 			putChannel(id, channel);
 		}
 
+		Long last = channel.attr(AK_LASTWRITE).get();
+		if (last != null) {
+			Long diff = (new Date()).getTime() - last;
+			if (diff < 1000) {
+				Thread.sleep(1000 - diff);
+			}
+		}
+		channel.attr(AK_LASTWRITE).set((new Date()).getTime());
+
 		ByteBuf b = channel.alloc().buffer(bytes.length);
 		b.writeBytes(bytes);
-		ChannelFuture chf = channel.write(b);
-		channel.flush();
+		ChannelFuture chf = channel.writeAndFlush(b);
 		return chf;
 	}
 
