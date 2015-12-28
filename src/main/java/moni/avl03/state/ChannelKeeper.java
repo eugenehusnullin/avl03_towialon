@@ -80,6 +80,7 @@ public class ChannelKeeper {
 		f = f.sync();
 		if (f.isSuccess()) {
 			f.channel().attr(AK_ID).set(id);
+			f.channel().attr(AK_LASTWRITE).set((new Date()).getTime() - 1001);
 			return f.channel();
 		} else {
 			throw new NotConnectedException();
@@ -105,12 +106,9 @@ public class ChannelKeeper {
 			putChannel(id, channel);
 		}
 
-		Long last = channel.attr(AK_LASTWRITE).get();
-		if (last != null) {
-			Long diff = (new Date()).getTime() - last;
-			if (diff < 1000) {
-				Thread.sleep(1000 - diff);
-			}
+		Long diff = (new Date()).getTime() - channel.attr(AK_LASTWRITE).get();
+		if (diff < 1000) {
+			Thread.sleep(1000 - diff);
 		}
 		channel.attr(AK_LASTWRITE).set((new Date()).getTime());
 
