@@ -11,10 +11,10 @@
 		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
 
 	<!-- FOR DEBUGING -->
-	<bean id="debugListener" class="moni.avl03.income.DebugListener" init-method="run" destroy-method="stop">
-		<property name="host" value="${out.host}"></property>
-		<property name="port" value="${out.port}"></property>
-	</bean>
+<!-- 	<bean id="debugListener" class="moni.avl03.income.DebugListener" init-method="run" destroy-method="stop"> -->
+<!-- 		<property name="host" value="${out.host}"></property> -->
+<!-- 		<property name="port" value="${out.port}"></property> -->
+<!-- 	</bean> -->
 
 	<util:properties id="mainSettings" location="WEB-INF\settings"></util:properties>
 	<context:property-placeholder location="WEB-INF\settings" />
