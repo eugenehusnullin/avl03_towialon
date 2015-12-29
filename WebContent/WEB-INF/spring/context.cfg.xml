@@ -49,7 +49,7 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="jmsManager" class="moni.avl03.state.JmsManager" init-method="init">
+	<bean id="jmsManager" class="moni.avl03.state.JmsManager" init-method="init" destroy-method="stop">
 		<property name="jmsContainer" ref="jmsContainer"></property>
 		<property name="channelKeeper" ref="channelKeeper"></property>
 	</bean>

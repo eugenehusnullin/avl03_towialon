@@ -27,6 +27,10 @@ public class JmsManager {
 	public void init() {
 		taskScheduler.initialize();
 	}
+	
+	public void stop() {
+		taskScheduler.shutdown();
+	}
 
 	public void stopJms() {
 		synchronized (sync) {
