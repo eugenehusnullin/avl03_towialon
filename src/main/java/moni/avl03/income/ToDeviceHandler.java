@@ -41,10 +41,9 @@ public class ToDeviceHandler extends ChannelHandlerAdapter {
 		byte[] messageBytes = new byte[b.readableBytes()];
 		b.readBytes(messageBytes);
 		String s = new String(messageBytes, asciiCharset);
-
-		commandsLogger.info(s);
-
 		Long id = ctx.channel().attr(ChannelKeeper.AK_ID).get();
+
+		commandsLogger.debug(id + " " + s);
 
 		CommandMessage cm = new CommandMessage(ProtocolType.command);
 		cm.setDate(new Date());

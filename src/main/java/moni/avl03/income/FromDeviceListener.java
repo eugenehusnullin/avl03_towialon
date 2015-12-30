@@ -86,7 +86,7 @@ public class FromDeviceListener implements MessageListener {
 	private void infoMessage(String str) {
 		InfoMessage mes = gson.fromJson(str, InfoMessage.class);
 		String encoded = avl03Encoder.encode(mes);
-		packetsLogger.info(encoded);
+		packetsLogger.debug(encoded);
 		logger.debug(encoded);
 
 		send(mes.getDeviceId(), encoded);
@@ -103,7 +103,7 @@ public class FromDeviceListener implements MessageListener {
 
 	private void responseMessage(String str) {
 		ResponseMessage mes = gson.fromJson(str, ResponseMessage.class);
-		responsesLogger.info(mes.getDeviceId().toString() + " - " + mes.getResponse());
+		responsesLogger.debug(mes.getDeviceId().toString() + " - " + mes.getResponse());
 		send(mes.getDeviceId(), mes.getResponse());
 	}
 
