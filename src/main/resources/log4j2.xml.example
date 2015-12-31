@@ -4,31 +4,31 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
-		<RollingFile name="errors" append="false" fileName="logs/mon03/avl03_towialon/errors.log" filePattern="logs/mon03/avl03_towialon/errors-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="errors" append="true" fileName="logs/mon03/avl03_towialon/errors.log" filePattern="logs/mon03/avl03_towialon/errors-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 			</Policies>
 		</RollingFile>
-		<RollingFile name="infos" append="false" fileName="logs/mon03/avl03_towialon/info.log" filePattern="logs/mon03/avl03_towialon/info-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="infos" append="true" fileName="logs/mon03/avl03_towialon/info.log" filePattern="logs/mon03/avl03_towialon/info-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 			</Policies>
 		</RollingFile>
-		<RollingFile name="packets" append="false" fileName="logs/mon03/avl03_towialon/packets.log" filePattern="logs/mon03/avl03_towialon/packets-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="packets" append="true" fileName="logs/mon03/avl03_towialon/packets.log" filePattern="logs/mon03/avl03_towialon/packets-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 			</Policies>
 		</RollingFile>
-		<RollingFile name="responses" append="false" fileName="logs/mon03/avl03_towialon/responses.log" filePattern="logs/mon03/avl03_towialon/responses-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="responses" append="true" fileName="logs/mon03/avl03_towialon/responses.log" filePattern="logs/mon03/avl03_towialon/responses-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 			</Policies>
 		</RollingFile>
-		<RollingFile name="commands" append="false" fileName="logs/mon03/avl03_towialon/commands.log" filePattern="logs/mon03/avl03_towialon/commands-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="commands" append="true" fileName="logs/mon03/avl03_towialon/commands.log" filePattern="logs/mon03/avl03_towialon/commands-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
