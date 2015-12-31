@@ -1,7 +1,6 @@
 package moni.avl03.income;
 
 import java.nio.charset.Charset;
-import java.util.Date;
 
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
@@ -33,8 +32,6 @@ public class FromDeviceListener implements MessageListener {
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss z").create();
 	private Avl03Encoder avl03Encoder = new Avl03Encoder();
 	private Charset asciiCharset = Charset.forName("ASCII");
-
-	private long two_minutes_in_miliseconds = 2 * 60 * 1000;
 
 	public void setChannelKeeper(ChannelKeeper channelKeeper) {
 		this.channelKeeper = channelKeeper;
@@ -94,11 +91,7 @@ public class FromDeviceListener implements MessageListener {
 
 	private void disconnectMessage(String str) {
 		DisconnectMessage mes = gson.fromJson(str, DisconnectMessage.class);
-
-		// if passed less than 2 minutes than disconnect channel
-		if ((new Date()).getTime() - mes.getDate().getTime() < two_minutes_in_miliseconds) {
-			channelKeeper.stopChannel(mes.getDeviceId());
-		}
+		channelKeeper.stopChannel(mes.getDeviceId());
 	}
 
 	private void responseMessage(String str) {
