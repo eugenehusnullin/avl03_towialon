@@ -27,6 +27,7 @@ public class FromDeviceListener implements MessageListener {
 	private static final Logger logger = LoggerFactory.getLogger(FromDeviceListener.class);
 	private static final Logger packetsLogger = LoggerFactory.getLogger("packets");
 	private static final Logger responsesLogger = LoggerFactory.getLogger("responses");
+	private static final Logger unsendedLogger = LoggerFactory.getLogger("unsended");
 	private ChannelKeeper channelKeeper;
 	private JmsManager jmsManager;
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss z").create();
@@ -110,6 +111,7 @@ public class FromDeviceListener implements MessageListener {
 					if (!future.isSuccess()) {
 						jmsManager.stopJms();
 						logger.error("Can't write to out. " + str, future.cause());
+						unsendedLogger.debug(str);
 					}
 				}
 			});

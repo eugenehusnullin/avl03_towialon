@@ -34,6 +34,12 @@
 				<TimeBasedTriggeringPolicy />
 			</Policies>
 		</RollingFile>
+		<RollingFile name="unsended" append="true" fileName="logs/mon03/avl03_towialon/unsended.log" filePattern="logs/mon03/avl03_towialon/unsended-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
 	</Appenders>
 	<Loggers>
 		<Logger name="commands" level="debug">
@@ -44,6 +50,9 @@
     	</Logger>
 		<Logger name="packets" level="debug">
       		<AppenderRef ref="packets" level="debug"/>
+    	</Logger>
+    	<Logger name="unsended" level="debug">
+      		<AppenderRef ref="unsended" level="debug"/>
     	</Logger>
 		<Root level="info">
 			<AppenderRef ref="infos" level="info" />
