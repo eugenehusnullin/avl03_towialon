@@ -6,3 +6,4 @@
 WebContent/lib/*
 src/main/resources/log4j2.xml
 WebContent/WEB-INF/settings
+/bin/
